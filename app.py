@@ -45,7 +45,7 @@ def add_new_record():
 
         with sqlite3.connect('database.db') as con:
             cur = con.cursor()
-            cur.execute("INSERT INTO students (firstname, lastname, email, mobile_number, password) "
+            cur.execute("INSERT INTO register (firstname, lastname, email, mobile_number, password) "
                         "VALUES (?, ?, ?, ?, ?)",
                         (firstname, lastname, email, mobile_number, password))
             con.commit()
@@ -67,7 +67,7 @@ def show_records():
         with sqlite3.connect('database.db') as con:
             con.row_factory = dict_factory
             cur = con.cursor()
-            cur.execute("SELECT * FROM students")
+            cur.execute("SELECT * FROM register")
             records = cur.fetchall()
 
     except Exception as e:
