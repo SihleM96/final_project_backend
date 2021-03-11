@@ -16,13 +16,12 @@ def init_sqlite_db():
     conn = sqlite3.connect('database.db')
     print("Opened database successfully")
 
-    conn.execute('CREATE TABLE IF NOT EXISTS register (id INTEGER AUTO_INCREMENT, firstname TEXT, lastname TEXT, '
+    conn.execute('CREATE TABLE IF NOT EXISTS register (firstname TEXT, lastname TEXT, '
                  'email TEXT, mobile_number TEXT, password TEXT)')
     print("User Table created successfully")
 
-    conn.execute('CREATE TABLE IF NOT EXISTS products (product_id INTEGER AUTO_INCREMENT, product_name TEXT, '
-                 'product_price INTEGER, category TEXT, description TEXT)')
-    print("User Table created successfully")
+    conn.execute('CREATE TABLE IF NOT EXISTS products (image TEXT, product_name TEXT, category TEXT, product_price INTEGER, description TEXT)')
+    print("Products Table created successfully")
     conn.close()
 
 
@@ -78,7 +77,7 @@ def show_records():
 
     except Exception as e:
         con.rollback()
-        print("There was an error fetching results from the database."+ e)
+        print("There was an error fetching results from the database." + e)
     finally:
         con.close()
         return jsonify(records)
@@ -92,18 +91,18 @@ def get_products():
         with sqlite3.connect('database.db') as con:
             con.row_factory = dict_factory
             cur = con.cursor()
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Salty', 'vase', '500', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/KcdCgnRw/vase1.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Hollow Lily', 'vase', '540', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/V60DYVB6/vase2.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Dusty', 'vase', '550', 'Lorem ipsum dolor sit amet','https://i.postimg.cc/YSG1gm4D/vase3.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Omari', 'vase', '500', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/VNCC5QT3/vase4.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Night Skies', 'bowl', '430', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/GhmCMggT/bowl1.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Blue Velvet', 'bowl', '400', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/05MysdTB/bowl2.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Azizi', 'bowl', '400', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/ZqGDymq3/bowl3.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('OLiver', 'bowl', '420', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/F1X9P8GJ/bowl4.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Malifa', 'cup', '200', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/wvtynK5W/cup1.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Nkungu', 'cup', '250', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/sgwMXfw6/cup2.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Misty', 'cup', '230', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/ryxz4Nft/cup3.jpg')")
-            cur.execute("INSERT INTO products (product_id, product_name, product_price, category, description) VALUES('Iseult', 'cup', '200', 'Lorem ipsum dolor sit amet', 'https://i.postimg.cc/wjfBzfjn/cup4.jpg')")
+            cur.execute("INSERT INTO products (image, product_name, category, product_price, description) VALUES('https://i.postimg.cc/KcdCgnRw/vase1.jpg','Salty', 'vase', '500', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category, product_price, description) VALUES( 'https://i.postimg.cc/jjsKGkSg/vase2.jpg','Hollow Lily', 'vase', '540', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category,  product_price, description) VALUES('https://i.postimg.cc/YSG1gm4D/vase3.jpg','Dusty', 'vase', '550', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category,product_price, description) VALUES( 'https://i.postimg.cc/VNCC5QT3/vase4.jpg','Omari', 'vase', '500', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category, product_price, description) VALUES('https://i.postimg.cc/GhmCMggT/bowl1.jpg','Night Skies', 'bowl', '430', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category,product_price, description) VALUES('https://i.postimg.cc/05MysdTB/bowl2.jpg','Blue Velvet', 'bowl', '400', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category, product_price, description) VALUES('https://i.postimg.cc/ZqGDymq3/bowl3.jpg','Azizi', 'bowl', '400', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category, product_price, description) VALUES('https://i.postimg.cc/F1X9P8GJ/bowl4.jpg','OLiver', 'bowl', '420', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category, product_price, description) VALUES( 'https://i.postimg.cc/wvtynK5W/cup1.jpg','Malifa', 'cup', '200', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category,product_price, description) VALUES('https://i.postimg.cc/sgwMXfw6/cup2.jpg','Nkungu', 'cup', '250', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category, product_price, description) VALUES('https://i.postimg.cc/ryxz4Nft/cup3.jpg','Misty', 'cup', '230', 'Lorem ipsum dolor sit amet')")
+            cur.execute("INSERT INTO products (image, product_name, category, product_price, description) VALUES( 'https://i.postimg.cc/wjfBzfjn/cup4.jpg','Iseult', 'cup', '200', 'Lorem ipsum dolor sit amet')")
             con.commit()
             msg = "added records"
     except Exception as e:
@@ -152,32 +151,6 @@ def show_products():
 #     finally:
 #         con.close()
 #         return jsonify(record)
-
-# SEND EMAIL
-
-@app.route('/send-email/', methods=["POST", "GET"])
-def send_email():
-    try:
-        subject = request.form['subject']
-        email = request.form['email']
-        message = MIMEText(request.form['message'])
-        message['Subject'] = subject
-        message['From'] = email
-        message['To'] = email
-
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        sender_email = email
-        receiver_email = 'siphesihlemambikimba@gmail.com'
-        password = "Yandiswa76!"
-
-        server.starttls()
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message.as_string())
-        server.quit()
-    except smtplib.SMTPException as e:
-        return "Something wrong happened: " + e
-    return render_template('email-success.html')
-
 
 if __name__ == "__main__":
     app.run(debug=True)
